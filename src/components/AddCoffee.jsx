@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddCoffee = () => {
   const handleAddCoffee = (e) => {
@@ -22,14 +23,20 @@ const AddCoffee = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        alert("Coffee added successfully!");
+
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Coffee Added Successfully!",
+            icon: "success",
+            draggable: true,
+          });
+          form.reset();
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
         alert("Failed to add coffee.");
       });
-
-    form.reset();
   };
 
   return (
@@ -113,15 +120,15 @@ const AddCoffee = () => {
               />
             </div>
 
-            {/* Category */}
+            {/* Price */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Category</span>
+                <span className="label-text font-medium">Price</span>
               </label>
               <input
-                type="text"
-                name="category"
-                placeholder="Enter coffee category"
+                type="number"
+                name="price"
+                placeholder="price of the coffee"
                 className="input input-bordered w-full"
               />
             </div>
