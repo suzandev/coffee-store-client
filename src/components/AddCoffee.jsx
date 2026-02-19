@@ -6,17 +6,29 @@ const AddCoffee = () => {
     e.preventDefault();
 
     const form = e.target;
-    const coffee = {
-      name: form.name.value,
-      chef: form.chef.value,
-      supplier: form.supplier.value,
-      taste: form.taste.value,
-      category: form.category.value,
-      details: form.details.value,
-      photo: form.photo.value,
-    };
+    const formData = new FormData(form);
+    const newCoffee = Object.fromEntries(formData.entries());
 
-    console.log(coffee);
+    console.log(newCoffee);
+
+    // send newCoffee to db server
+    fetch("http://localhost:3000/coffees", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCoffee),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Coffee added successfully!");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Failed to add coffee.");
+      });
+
     form.reset();
   };
 
@@ -64,12 +76,12 @@ const AddCoffee = () => {
             {/* Chef */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Chef</span>
+                <span className="label-text font-medium">Quantity</span>
               </label>
               <input
-                type="text"
-                name="chef"
-                placeholder="Enter coffee chef"
+                type="number"
+                name="quantity"
+                placeholder="Enter coffee quantity"
                 className="input input-bordered w-full"
                 required
               />
