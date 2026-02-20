@@ -1,4 +1,5 @@
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { Link } from "react-router";
 import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee }) => {
@@ -59,9 +60,11 @@ const CoffeeCard = ({ coffee }) => {
 
       {/* Action Buttons */}
       <div className="flex md:flex-col gap-3">
-        <button className="btn btn-sm bg-[#D2B48C] hover:bg-[#c09a6b] text-white border-none">
-          <FaEye />
-        </button>
+        <Link to={`/coffee/${_id}`}>
+          <button className="btn btn-sm bg-[#D2B48C] hover:bg-[#c09a6b] text-white border-none">
+            <FaEye />
+          </button>
+        </Link>
 
         <button className="btn btn-sm btn-neutral text-white">
           <FaEdit />
