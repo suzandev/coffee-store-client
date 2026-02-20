@@ -55,7 +55,11 @@ export default function CoffeeGallery() {
       </div>
 
       {/* Responsive Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        data-aos="fade-up"
+        data-aos-anchor-placement="center-bottom"
+        data-aos-duration="2000">
         {coffeeImages.map((coffee) => (
           <div
             key={coffee.id}

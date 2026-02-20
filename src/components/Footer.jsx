@@ -14,7 +14,7 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 bg-opacity-90 pattern-bg py-12 relative">
+    <footer className="bg-gray-100 bg-opacity-90 pattern-bg pt-12 pb-5 relative">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
         {/* Left Side */}
         <div>

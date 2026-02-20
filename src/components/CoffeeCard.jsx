@@ -66,9 +66,11 @@ const CoffeeCard = ({ coffee }) => {
           </button>
         </Link>
 
-        <button className="btn btn-sm btn-neutral text-white">
-          <FaEdit />
-        </button>
+        <Link to={`/updateCoffee/${_id}`}>
+          <button className="btn btn-sm btn-neutral text-white">
+            <FaEdit />
+          </button>
+        </Link>
 
         <button
           onClick={() => handleDelete(_id)}
