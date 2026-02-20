@@ -1,7 +1,41 @@
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee }) => {
-  const { name, chef, price, photo } = coffee;
+  const { _id, name, quantity, price, photo } = coffee;
+
+  const handleDelete = (_id) => {
+    // Implement delete functionality here
+    console.log("Delete coffee:", _id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/coffees/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Coffee has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+
+        // });
+      }
+    });
+  };
 
   return (
     <div className="bg-base-100 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-4 md:p-6 flex flex-col md:flex-row items-center gap-6">
@@ -16,7 +50,7 @@ const CoffeeCard = ({ coffee }) => {
           <span className="font-semibold">Name:</span> {name}
         </p>
         <p className="text-sm">
-          <span className="font-semibold">Chef:</span> {chef}
+          <span className="font-semibold">Quantity:</span> {quantity}
         </p>
         <p className="text-sm">
           <span className="font-semibold">Price:</span> {price} Taka
@@ -33,7 +67,9 @@ const CoffeeCard = ({ coffee }) => {
           <FaEdit />
         </button>
 
-        <button className="btn btn-sm btn-error text-white">
+        <button
+          onClick={() => handleDelete(_id)}
+          className="btn btn-sm btn-error text-white">
           <FaTrash />
         </button>
       </div>

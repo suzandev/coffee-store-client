@@ -1,15 +1,20 @@
 import { Link, useLoaderData } from "react-router";
 import CoffeeCard from "./CoffeeCard";
+import Header from "./Header";
+import Features from "./Features";
+import CoffeeGallery from "./CoffeeGallery";
+import Navbar from "./Navbar";
 
 const Home = () => {
   const coffees = useLoaderData();
   console.log(coffees);
   return (
     <div>
-      <h3>Welcome to the Coffee Store Home Page</h3>
-
+      <Navbar />
+      <Header />
+      <Features />
       {/* Popular Products Section */}
-      <div className="relative bg-[#F4F3F0] py-16 px-4">
+      <div className="relative bg-[#F4F3F0] py-16 px-4 ">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-sm text-gray-500 tracking-widest mb-2">
             --- Sip & Savor ---
@@ -33,6 +38,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* Coffee Gallery Section */}
+      <CoffeeGallery />
     </div>
   );
 };
