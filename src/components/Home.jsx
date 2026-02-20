@@ -4,10 +4,12 @@ import Header from "./Header";
 import Features from "./Features";
 import CoffeeGallery from "./CoffeeGallery";
 import Navbar from "./Navbar";
+import { useState } from "react";
 
 const Home = () => {
-  const coffees = useLoaderData();
-  console.log(coffees);
+  const initialCoffees = useLoaderData();
+  const [coffees, setCoffees] = useState(initialCoffees);
+
   return (
     <div>
       <Navbar />
@@ -33,7 +35,12 @@ const Home = () => {
           {/* Coffee Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {coffees.map((coffee) => (
-              <CoffeeCard key={coffee._id} coffee={coffee} />
+              <CoffeeCard
+                key={coffee._id}
+                coffee={coffee}
+                coffees={coffees}
+                setCoffees={setCoffees}
+              />
             ))}
           </div>
         </div>

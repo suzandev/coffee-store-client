@@ -15,22 +15,17 @@ const UpdateCoffee = () => {
 
     const form = e.target;
 
-    const updatedCoffee = {
-      name: form.name.value,
-      quantity: form.quantity.value,
-      supplier: form.supplier.value,
-      taste: form.taste.value,
-      category: form.category.value,
-      details: form.details.value,
-      photo: form.photo.value,
-    };
+    const updatedCoffee = new FormData(form);
+    const updatedCoffeeData = Object.fromEntries(updatedCoffee.entries());
+
+    //send updated data to the db server
 
     fetch(`http://localhost:3000/coffee/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(updatedCoffee),
+      body: JSON.stringify(updatedCoffeeData),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -42,6 +37,13 @@ const UpdateCoffee = () => {
             confirmButtonColor: "#6F4E37",
           });
           navigate("/");
+        } else {
+          Swal.fire({
+            title: "No Changes Detected",
+            text: "No fields were updated. Please make changes before submitting.",
+            icon: "info",
+            confirmButtonColor: "#6F4E37",
+          });
         }
       });
   };
@@ -172,7 +174,7 @@ const UpdateCoffee = () => {
               type="submit"
               className="btn w-full bg-blue-800 hover:bg-blue-600 text-white border-none md:text-lg">
               <FaSave className="mr-2" />
-              Update Coffee Details
+              Update Coffee
             </button>
           </div>
         </form>
