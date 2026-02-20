@@ -5,6 +5,7 @@ import CoffeeGallery from "./CoffeeGallery";
 import Navbar from "./Navbar";
 
 import CoffeeProducts from "./CoffeeProducts";
+import SignIn from "./SignIn";
 
 const Home = () => {
   return (
