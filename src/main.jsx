@@ -8,6 +8,7 @@ import Home from "./components/Home.jsx";
 import AddCoffee from "./components/AddCoffee.jsx";
 import UpdateCoffee from "./components/UpdateCoffee.jsx";
 import CoffeeDetails from "./components/CoffeeDetails.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
         Component: UpdateCoffee,
       },
     ],
+    errorElement: <ErrorPage />,
   },
 ]);
 

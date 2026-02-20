@@ -7,7 +7,6 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
 
   const handleDelete = (_id) => {
     // Implement delete functionality here
-    console.log("Delete coffee:", _id);
 
     Swal.fire({
       title: "Are you sure?",
@@ -42,7 +41,11 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   };
 
   return (
-    <div className="bg-base-100 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-4 md:p-6 flex flex-col md:flex-row items-center gap-6">
+    <div
+      className="bg-base-100 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-4 md:p-6 flex flex-col md:flex-row items-center gap-6"
+      data-aos="fade-up"
+      data-aos-easing="ease-out-cubic"
+      data-aos-duration="2000">
       {/* Coffee Image */}
       <div className="w-32 h-40 flex justify-center items-center">
         <img src={photo} alt={name} className="h-full object-contain" />
