@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       {
         index: true,
         loader: async () =>
-          fetch("https://coffee-store-server-lv1l.vercel.app/coffees"),
+          fetch("https://coffee-store-server-ashy-alpha.vercel.app/coffees"),
         Component: Home,
       },
       {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         path: "coffee/:id",
         loader: async ({ params }) =>
           fetch(
-            `https://coffee-store-server-lv1l.vercel.app/coffees/${params.id}`,
+            `https://coffee-store-server-ashy-alpha.vercel.app/coffees/${params.id}`,
           ),
         Component: CoffeeDetails,
       },
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         path: "updateCoffee/:id",
         loader: ({ params }) =>
           fetch(
-            `https://coffee-store-server-lv1l.vercel.app/coffees/${params.id}`,
+            `https://coffee-store-server-ashy-alpha.vercel.app/coffees/${params.id}`,
           ),
         Component: UpdateCoffee,
       },
@@ -56,11 +56,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         loader: async () =>
-          fetch("https://coffee-store-server-lv1l.vercel.app/users"),
+          fetch("https://coffee-store-server-ashy-alpha.vercel.app/users"),
         Component: Users,
       },
     ],
-    // errorElement: <ErrorPage />,
   },
 ]);
 

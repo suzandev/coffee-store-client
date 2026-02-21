@@ -33,7 +33,7 @@ const SignUp = () => {
 
         console.log(userProfile, email, password);
 
-        fetch("https://coffee-store-server-lv1l.vercel.app/users", {
+        fetch("https://coffee-store-server-ashy-alpha.vercel.app/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
