@@ -21,7 +21,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: async () => fetch("http://localhost:3000/coffees"),
+        loader: async () =>
+          fetch("https://coffee-store-server-lv1l.vercel.app/coffees"),
         Component: Home,
       },
       {
@@ -31,13 +32,17 @@ const router = createBrowserRouter([
       {
         path: "coffee/:id",
         loader: async ({ params }) =>
-          fetch(`http://localhost:3000/coffees/${params.id}`),
+          fetch(
+            `https://coffee-store-server-lv1l.vercel.app/coffees/${params.id}`,
+          ),
         Component: CoffeeDetails,
       },
       {
         path: "updateCoffee/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/coffees/${params.id}`),
+          fetch(
+            `https://coffee-store-server-lv1l.vercel.app/coffees/${params.id}`,
+          ),
         Component: UpdateCoffee,
       },
       {
@@ -50,7 +55,8 @@ const router = createBrowserRouter([
       },
       {
         path: "users",
-        loader: async () => fetch("http://localhost:3000/users"),
+        loader: async () =>
+          fetch("https://coffee-store-server-lv1l.vercel.app/users"),
         Component: Users,
       },
     ],

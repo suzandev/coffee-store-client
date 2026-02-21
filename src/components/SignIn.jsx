@@ -29,7 +29,7 @@ const SignIn = () => {
           lastSignInTime: userCredential.user.metadata.lastSignInTime,
         };
         console.log("User signed in successfully:", user);
-        fetch("http://localhost:3000/users", {
+        fetch("https://coffee-store-server-lv1l.vercel.app/users", {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
