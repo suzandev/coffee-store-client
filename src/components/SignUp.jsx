@@ -16,16 +16,23 @@ const SignUp = () => {
 
     const formData = new FormData(form);
 
-    const { email, password, ...userProfile } = Object.fromEntries(
+    const { email, password, ...restFormData } = Object.fromEntries(
       formData.entries(),
     );
-
-    console.log(userProfile, email, password);
 
     // your signup logic here
 
     createUser(email, password)
       .then((userCredential) => {
+        const userProfile = {
+          email,
+          ...restFormData,
+          creationTime: userCredential.user.metadata.creationTime,
+          lastSignInTime: userCredential.user.metadata.lastSignInTime,
+        };
+
+        console.log(userProfile, email, password);
+
         fetch("http://localhost:3000/users", {
           method: "POST",
           headers: {

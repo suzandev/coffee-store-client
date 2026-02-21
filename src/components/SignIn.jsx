@@ -1,10 +1,13 @@
-import React from "react";
+import React, { use } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import loginImg from "../assets/coffeeLogin.jpg";
+import { AuthContext } from "../contexts/AuthContext";
 
 const SignIn = () => {
+  const { signInUser } = use(AuthContext);
+  console.log("SignIn User Info from Context:", signInUser); // Debugging line
   const navigate = useNavigate();
 
   const handleSignIn = (e) => {
@@ -13,6 +16,36 @@ const SignIn = () => {
 
     const email = form.email.value;
     const password = form.password.value;
+
+    // firebase sign in send
+    signInUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        //update last sign in time in backend
+        const singInfo = {
+          email,
+          lastSignInTime: userCredential.user.metadata.lastSignInTime,
+        };
+        console.log("User signed in successfully:", user);
+        fetch("http://localhost:3000/users", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(singInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("User sign in time updated:", data);
+          })
+          .catch((error) => {
+            console.error("Error updating sign in time:", error);
+          });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error signing in:", error);
+      });
 
     console.log(email, password);
 
