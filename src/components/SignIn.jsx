@@ -1,13 +1,15 @@
 import React, { use } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { FaArrowLeft, FaEnvelope, FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import loginImg from "../assets/coffeeLogin.jpg";
 import { AuthContext } from "../contexts/AuthContext";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase/firebase.init";
 
 const SignIn = () => {
   const { signInUser } = use(AuthContext);
-  console.log("SignIn User Info from Context:", signInUser); // Debugging line
+
   const navigate = useNavigate();
 
   const handleSignIn = (e) => {
@@ -46,17 +48,33 @@ const SignIn = () => {
       .catch((error) => {
         console.error("Error signing in:", error);
       });
+  };
 
-    console.log(email, password);
-
-    // TODO: Connect with Firebase / Backend Authentication
-    navigate("/");
+  // login with google
+  const handleGoogleSignIn = () => {
+    // Implement Google sign-in functionality here
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log("Google sign-in successful:", user);
+        // You can also save the user info to your backend if needed
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Error signing in with Google:", error);
+      });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F3EFEA] px-4">
+    <div
+      className=" flex items-center justify-center bg-[#F3EFEA] py-10 px-4"
+      data-aos="fade-up"
+      data-aos-anchor-placement="center-bottom"
+      data-aos-duration="2000">
       <div className="w-full max-w-6xl bg-white shadow-2xl rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 ">
         {/* LEFT SIDE - FORM */}
+
         <div className="p-8 md:p-16 flex flex-col justify-center">
           <div className="mb-8 text-center lg:text-left">
             <h2 className="text-3xl md:text-4xl font-bold text-[#4B2E2B] mb-2">
@@ -119,7 +137,9 @@ const SignIn = () => {
             </button>
 
             {/* Google Login */}
-            <button className="w-full flex items-center justify-center gap-3 border p-3 rounded-lg hover:bg-gray-50 transition cursor-pointer">
+            <button
+              onClick={handleGoogleSignIn}
+              className="w-full flex items-center justify-center gap-3 border p-3 rounded-lg hover:bg-gray-50 transition cursor-pointer">
               <FcGoogle size={22} />
               Continue with Google
             </button>
